@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mutual Fund Sahi hai</title>
+    <meta name="description" content="Mutual Fund Sahi hai" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="Replace_with_your_PAGE_URL" />
+
+    <!-- Stylesheets -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <link href="./css/responsive.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"> -->
+
+    <!-- Add site Favicon -->
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
+    <meta name="msapplication-TileImage" content="./images/favicon.png" />
+</head>
+
+<body class="overflow-h">
+
+    <div class="page-wrapper">
+
+        <!-- Main Header-->
+        <header class="main-header">
+            <div class="header-upper">
+                <div class="outer-container">
+                    <div class="inner-container clearfix">
+                        <div class="pull-left logo-box">
+                            <div class="logo"><a href="javascript:void(0);"><img src="./images/bhaarat-nivesh-yatra.svg"
+                                        alt="" title=""></a></div>
+                        </div>
+
+                        <div class="outer-box clearfix pull-right logo-box">
+                            <div class="logo"><a href="javascript:void(0);"><img src="./images/mutual-fund-sahi-hai.svg"
+                                        alt="" title=""></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <section class="contact-page-section bg-image pt-0 icon-box-main">
+            <img src="./images/icon3.svg" class="icon-inner">
+            <div class=" bg-color2 ">
+                <div class="auto-container padd-70 pb-30">
+                    <p class="text-center mt-2 mb-30">
+                        <!-- <span class="gradient-button">Goal SIP Calculator</span> -->
+                    </p>
+                    <p class="feed-back-head text-center" id="goal-headline"></p>
+                    <div class="form-center-box1 mb-30">
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="row gola-sip-range align-items-center">
+                                    <div class="col-md-8">
+                                        <label for="formControlRange" id="goal-amount" class="range-title"></label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" id="output1" class="goal-sip-amt" value="1500000" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="range" min="100000" max="100000000" value="1500000" step="10000"
+                                            class="form-control-range range-slider" id="slider1">
+                                    </div>
+                                </div>
+                                <div class="row gola-sip-range align-items-center">
+                                    <div class="col-md-8">
+                                        <label for="formControlRange" id="investment" class="range-title"></label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" id="output2" class="goal-sip-amt" value="1" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="range" min="1" max="50" value="1"
+                                            class="form-control-range range-slider" id="slider2">
+                                    </div>
+                                </div>
+                                <div class="row gola-sip-range align-items-center mb-0">
+                                    <div class="col-md-8">
+                                        <label for="formControlRange" id="expected-returns" class="range-title"></label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" id="output3" class="goal-sip-amt" value="12" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="range" min="3" max="12" value="8"
+                                            class="form-control-range range-slider" id="slider3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="goal-sip-am-box">
+                                    <div class="row">
+                                        <div class="col-md-12 align-self-start">
+                                            <p class="goal-sip-f-amt" id="monthly-sip">
+                                                <br>
+                                            </p>
+                                            <span class="goal-sip-f-amt" style="font-weight: 600; color : #09876F"
+                                                id="maturityAmount">₹0.00</span>
+                                        </div>
+                                        <div class="col-md-12 align-self-end">
+                                            <p class="goal-sip-f-amt" id="total-investment">
+                                                <br>
+                                            </p>
+                                            <span class="goal-sip-f-amt" style="font-weight: 600; color : #09876F"
+                                                id="totalInvestment">₹0.00</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="goal-sip-amt-box">
+                                    <p id="investment-summary"></p>
+                                </div>
+                            </div>
+                            <span id="countdown"></span>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group Center">
+                            <h3 class="black-text" id="disclaimer"></h3>
+                            <p class="black-text" style="font-weight: 600;" id="foot-note">
+                            </p>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group Center msg-btn">
+                                <button class="theme-btn btn-style-one" type="submit" name="submit-form"
+                                    onclick="submitForm()"><span class="txt" id="goal-btn"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scroll To Top -->
+    <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-up"></span></div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/config.js" type="module"></script>
+    <script type="module">
+        import { startTimer } from "./js/helper.js";
+        let intervalId;
+
+        function setupSlider(sliderId, outputId, min, max) {
+            var slider = document.getElementById(sliderId);
+            var output = document.getElementById(outputId);
+
+            // Function to format the number in Indian currency format
+            function formatIndianCurrency(num) {
+                let numStr = num.toString();
+                let lastThreeDigits = numStr.substring(numStr.length - 3);
+                let otherDigits = numStr.substring(0, numStr.length - 3);
+                if (otherDigits) {
+                    lastThreeDigits = ',' + lastThreeDigits;
+                }
+                let formattedNumber = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThreeDigits;
+                return '₹ ' + formattedNumber;
+            }
+
+            // Function to parse the input value back to a number
+            function parseCurrency(value) {
+                return parseFloat(value.replace(/[^0-9.-]+/g, ""));
+            }
+
+            if (sliderId === 'slider1') {
+                output.value = formatIndianCurrency(slider.value);
+            } else {
+                output.value = slider.value; // Directly set for other sliders
+            }
+
+            slider.addEventListener('input', function () {
+                if (sliderId === 'slider1') {
+                    output.value = formatIndianCurrency(this.value); // Display formatted value
+                } else {
+                    output.value = this.value; // Directly set for other sliders
+                }
+                calculateGoalSip(); // Call the calculation function on input event for real-time updates
+            });
+
+            // Update the calculation when the input field value changes directly
+            output.addEventListener('input', function () {
+                if (sliderId === 'slider1') {
+                    const numericValue = parseCurrency(this.value); // Parse the numeric value
+                    if (!isNaN(numericValue)) {
+                        slider.value = numericValue; // Sync slider with the parsed value
+                    }
+                    this.value = formatIndianCurrency(numericValue); // Format for display
+                } else {
+                    const numericValue = parseFloat(this.value);
+                    if (!isNaN(numericValue)) {
+                        slider.value = numericValue; // Sync slider with the parsed value
+                    }
+                }
+                calculateGoalSip();
+            });
+
+                 // slider validation js start
+                 output.addEventListener('input', function () {
+    let val = parseCurrency(this.value); // Parse the numeric value
+
+    if (isNaN(val)) return; // Don't process if input is invalid
+
+    // Check if the value is out of bounds
+    if (val > max) {
+        switch (sliderId) {
+            case 'slider1':
+                alert(`Please enter a goal amount between ₹${min.toLocaleString()} and ₹${max.toLocaleString()}.`);
+                val = (val < min) ? min : max; // Set to default if out of bounds
+                break;
+            case 'slider2':
+                alert(`Please enter an investment duration between ${min} and ${max} years.`);
+                val = (val < min) ? min : max; // Set to default if out of bounds
+                break;
+            default:
+                alert(`Please ensure that the expected rate of return is between ${min}% and ${max}%.`);
+                val = (val < min) ? min : max; // Set to default if out of bounds
+                break;
+        }
+    }
+
+    // Update the slider to reflect the validated value
+    slider.value = val;
+
+    if (sliderId === 'slider1') {
+        this.value = formatIndianCurrency(val); // Format for display if it's the goal amount
+    } else {
+        this.value = val; // Set the raw value for other sliders
+    }
+
+    calculateGoalSip(); // Call the calculation function after validation
+});
+
+// Validate output field and update slider when output loses focus
+output.onblur = function () {
+    let val = parseCurrency(this.value);
+
+    if (val < min || val > max || isNaN(val)) {
+        switch (sliderId) {
+            case 'slider1':
+                alert(`Please enter a goal amount between ₹${min.toLocaleString()} and ₹${max.toLocaleString()}.`);
+                val = (val < min) ? min : max; // Set to default if out of bounds
+                break;
+            case 'slider2':
+                alert(`Please enter an investment duration between ${min} and ${max} years.`);
+                val = (val < min) ? min : max; // Set to default if out of bounds
+                break;
+            default:
+                alert(`Please ensure that the expected rate of return is between ${min}% and ${max}%.`);
+                val = (val < min) ? min : max; // Set to default if out of bounds
+                break;
+        }
+        this.value = formatIndianCurrency(val); // Correct the value and format it
+    }
+
+    slider.value = val; // Sync slider with the validated output value
+    calculateGoalSip(); // Call the calculation function after validation
+};
+
+        }
+
+     // slider validation js end
+        function goalSipCalculator(goalAmount, rateOfReturn, investmentDuration) {
+            function pmt(rate, per, nper, pv, fv) {
+                if (fv == 0) {
+                    return null;
+                }
+
+                rate = rate / (per * 100);
+
+                if (rate == 0) {
+                    return -(fv + pv) / nper;
+                } else {
+                    var x = Math.pow(1 + rate, nper);
+                    fv = fv + x * pv;
+                    return -((rate * fv) / (-1 + x));
+                }
+            }
+
+            if (!(isFinite(goalAmount) && isFinite(rateOfReturn) && isFinite(investmentDuration))) {
+                return null;
+            }
+
+            // Assuming monthly SIP investment
+            var per = 12;
+            var nper = per * investmentDuration;
+
+            var pmtValue = pmt(rateOfReturn, per, nper, 0, goalAmount) * -1;
+            var investment = pmtValue * nper;
+
+            if (pmtValue < 1) {
+                pmtValue = 0;
+                investment = 0;
+            }
+
+            return {
+                pmtValue: pmtValue,
+                investment: investment,
+                earnings: (goalAmount - investment)
+            };
+        }
+
+        // Function to replace placeholders in text with actual values
+        function replacePlaceholders(text, placeholders) {
+            // Replace each placeholder in the text with its corresponding value
+            for (const key in placeholders) {
+                const regex = new RegExp(`\\$${key}\\$`, 'g'); // Create a regex pattern for the placeholder
+                text = text.replace(regex, placeholders[key]); // Replace the placeholder with the actual value
+            }
+            return text;
+        }
+
+        // Function to load the language JSON file based on the selected language stored in localStorage
+        function loadLanguageStrings(callback) {
+            // Get the selected language from localStorage, default to English if not set
+            const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            const langFilePath = `./lang/${selectedLanguage}.json`;
+
+            // Fetch the language JSON file
+            fetch(langFilePath)
+                .then(response => response.json())
+                .then(translations => {
+                    console.log('Loaded Translations:', translations); // Log the loaded translations to check key names
+
+                    // Define placeholders with their actual values (e.g., user's name)
+                    const placeholders = {
+                        USER: localStorage.getItem('userName') || 'Guest' // Replace with user's name or default to 'Guest'
+                    };
+
+                    // Store translations and placeholders globally
+                    window.translations = translations;
+                    window.placeholders = placeholders;
+
+                    // Update the text content with the translations and replace placeholders
+                    document.getElementById('goal-headline').innerHTML = replacePlaceholders(translations['goal-headline'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('goal-amount').innerHTML = replacePlaceholders(translations['goal-amount'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('investment').innerHTML = replacePlaceholders(translations['investment'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('expected-returns').innerHTML = replacePlaceholders(translations['expected-returns'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('total-investment').innerHTML = replacePlaceholders(translations['total-investment'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('monthly-sip').innerHTML = replacePlaceholders(translations['monthly-sip'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('disclaimer').innerHTML = replacePlaceholders(translations['disclaimer'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('foot-note').innerHTML = replacePlaceholders(translations['foot-note'] || 'Fallback text if missing', placeholders);
+                    document.getElementById('goal-btn').innerHTML = replacePlaceholders(translations['goal-btn'] || 'Fallback text if missing', placeholders);
+
+                    // Call the callback function after translations are loaded
+                    if (callback) callback();
+                })
+                .catch(error => {
+                    console.error('Error loading language file:', error);
+                    if (callback) callback(error);
+                });
+        }
+
+        function calculateGoalSip() {
+            if (!window.translations || !window.placeholders) {
+                console.error('Translations not loaded yet.');
+                return;
+            }
+
+            // Extracting numeric value from output1 after formatting
+            var goalAmount = parseFloat(document.getElementById('output1').value.replace(/[₹,\s]/g, ''));
+            var rateOfReturn = parseFloat(document.getElementById('output3').value);
+            var investmentDuration = parseFloat(document.getElementById('output2').value);
+
+            // Debugging logs to verify values
+            console.log('Parsed Values:', {
+                goalAmount,
+                rateOfReturn,
+                investmentDuration
+            });
+
+            // Validate the extracted values
+            if (isNaN(goalAmount) || isNaN(rateOfReturn) || isNaN(investmentDuration)) {
+                document.getElementById('investment-summary').innerHTML = '<p class="result-error">Error! Ensure all values are valid numbers.</p>';
+                return;
+            }
+
+            var result = goalSipCalculator(goalAmount, rateOfReturn, investmentDuration);
+
+            if (result === null) {
+                document.getElementById('investment-summary').innerHTML = '<p class="result-error">Error! Ensure all the values are valid numbers.</p>';
+            } else {
+                // Create placeholders specific to this calculation
+                const calculationPlaceholders = {
+                    SIPAMOUNT:  '₹ '+Math.floor(result.pmtValue).toLocaleString('en-IN'),
+                    INVESTYEAR: investmentDuration,
+                    GOALAMOUNT: goalAmount.toLocaleString('en-IN')
+                };
+
+                // Merge with global placeholders
+                const allPlaceholders = { ...window.placeholders, ...calculationPlaceholders };
+
+                // Get the translation for the investment summary
+                const investmentSummaryTemplate = window.translations['luxury-car-tag-line'];
+
+                // Replace placeholders in the investment summary
+                const investmentSummaryText = replacePlaceholders(investmentSummaryTemplate, allPlaceholders);
+
+                // Update the investment summary on the page
+                document.getElementById('investment-summary').innerHTML = investmentSummaryText;
+
+                // Update other elements if needed
+                document.getElementById('maturityAmount').innerText = "₹" + Math.floor(result.pmtValue).toLocaleString('en-IN');
+              document.getElementById('totalInvestment').innerText = "₹" + Math.floor(result.investment).toLocaleString('en-IN');
+            }
+        }
+
+        // Set up each slider with the respective min/max values
+        setupSlider('slider1', 'output1', 100000, 100000000);
+        setupSlider('slider2', 'output2', 1, 50);
+        setupSlider('slider3', 'output3', 3, 12);
+
+        // Initial SIP calculation
+        calculateGoalSip();
+
+        window.submitForm = async function () {
+            const btn = document.querySelector('button[name="submit-form"]');
+            btn.disabled = true;
+            const userId = localStorage.getItem('userId');
+
+            // Extract values from inputs
+            let goalAmount = parseFloat(document.getElementById('output1').value.replace(/₹|,/g, '')); // Remove Rupee symbol and commas, then parse
+            let investmentDuration = parseFloat(document.getElementById('output2').value); // Duration in years
+            let annualReturnRate = parseFloat(document.getElementById('output3').value); // Annual return rate
+
+            // Use the goalSipCalculator to calculate the necessary values
+            const result = goalSipCalculator(goalAmount, annualReturnRate, investmentDuration);
+
+            // Prepare the data object
+            const data = {
+                monthlyInvestment: Math.floor(result.pmtValue), // Round down to nearest integer
+                investmentDuration: investmentDuration * 12, // Convert years to months for consistency
+                expectedROR: Math.floor(annualReturnRate) / 100, // Annual rate as a decimal without decimal points
+                maturityAmount: goalAmount,
+                totalInvestment: Math.floor(result.pmtValue * (investmentDuration * 12)), // Total investment over the duration, rounded down
+                userId,
+                goalSelected: 'Luxury Car'
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', `${window.baseUrl}/bny/sip-calc`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) { // request completed
+                    if (xhr.status >= 200 && xhr.status < 300) { // success
+                        console.log("response => ", xhr.responseText);
+                        window.location.replace('./thankyou.html'); // Redirect on success
+                    } else {
+                        console.log("error", xhr.statusText);
+                    }
+                }
+            };
+
+            xhr.onerror = function() {
+                console.log("error", xhr.statusText);
+            };
+            // Send the request
+            xhr.send(JSON.stringify(data));
+        };
+
+        async function setGoalSelected() {
+            const userId = localStorage.getItem('userId');
+            try {
+                fetch(`${window.baseUrl}/user-analytics/goal-selected`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId, goalSelected: 'Luxury Car' }) // Update goalSelected as per your goal
+                })
+                    .then(response => response.json())
+                    .then(data => { console.log('data', data) })
+            } catch (error) {
+                console.error('Error setting goal', error);
+            }
+        }
+
+        window.onload = function () {
+            loadLanguageStrings(function () {
+                // Translations are loaded, now set up sliders and calculate SIP
+
+                // Set up each slider with the respective min/max values
+                setupSlider('slider1', 'output1', 100000, 100000000);
+                setupSlider('slider2', 'output2', 1, 50);
+                setupSlider('slider3', 'output3', 3, 12);
+
+                // Initial SIP calculation
+                calculateGoalSip();
+
+                let duration = 45;
+                let display = document.querySelector("#countdown");
+
+                // Start the initial timer
+                intervalId = startTimer(duration, display);
+
+                window.onclick = function () {
+                    // Clear the old timer before starting a new one
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                    }
+
+                    // Reset the timer
+                    intervalId = startTimer(duration, display);
+                };
+
+                setGoalSelected();
+            });
+        };
+
+    </script>
+</body>
+
+</html>

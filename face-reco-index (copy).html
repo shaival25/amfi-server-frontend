@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Authentication</title>
+    <!-- Stylesheets -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <link href="./css/select2.min.css" rel="stylesheet">
+    <link href="./css/responsive.css" rel="stylesheet">
+
+    <style>
+        canvas {
+            display: none; /* Initially hide the canvas to prevent black box */
+            position: relative;
+        }
+
+        .camera-bg {
+            background: url(./images/backgrouns.jpg);
+            min-height: calc(100vh - 89px);
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #message {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: white;
+        }
+
+        /* Initially hide the overlay and countdown */
+        #overlay-box,
+        #countdownCircle {
+            display: none;
+        }
+
+        #overlay-box {
+            border: 5px solid red;
+            width: 70%;
+            height: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #countdownCircle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .canvas-container {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body class="body overflow-h">
+    <header class="main-header">
+        <div class="header-upper">
+            <div class="outer-container">
+                <div class="inner-container clearfix">
+                    <div class="pull-left logo-box">
+                        <div class="logo"><a href="javascript:void(0);"><img src="./images/bhaarat-nivesh-yatra.svg" alt=""
+                                    title=""></a></div>
+                    </div>
+                    <div class="outer-box clearfix pull-right logo-box">
+                        <div class="logo"><a href="javascript:void(0);"><img src="./images/mutual-fund-sahi-hai.svg" alt=""
+                                    title=""></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="camera-bg">
+        <div class="auto-container padd-70 text-center">
+            <h3 class="white-text mb-30">
+                Please Look at the Camera&nbsp;&nbsp; <i class="fas fa-arrow-up"></i>
+            </h3>
+            <div class="canvas-container">
+                <canvas id="canvas" width="600" height="400"></canvas>
+                <div id="overlay-box"></div>
+                <div id="countdownCircle" style="display: none;">5</div>
+            </div>
+        </div>
+        <div id="message" class="text-center"></div>
+    </div>
+
+    <script src="./js/config.js" type="module"></script>
+
+    <script>
+        const video = document.createElement('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const message = document.getElementById('message');
+        const countdownElement = document.getElementById('countdownCircle');
+        const overlayBox = document.getElementById('overlay-box');
+        let stopDetection = false;
+        let countdownStarted = false;
+
+        // Start video and display on canvas
+        function startVideo() {
+            navigator.mediaDevices.getUserMedia({ video: { width: 896, height: 504 } })
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.play();
+                    video.onloadeddata = () => {
+                        // Only show canvas once the video is ready
+                        canvas.style.display = 'block';
+                        drawVideoToCanvas();
+                    };
+                })
+                .catch(error => {
+                    console.error('Error accessing media devices.', error);
+                    message.innerHTML = 'Error accessing camera.';
+                });
+        }
+
+        // Draw video feed to the canvas
+        function drawVideoToCanvas() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            if (!stopDetection) {
+                requestAnimationFrame(drawVideoToCanvas);
+            }
+
+            // Start the countdown only once, after the video has started
+            if (!countdownStarted) {
+                countdownStarted = true;
+                overlayBox.style.display = 'block';
+                countdownElement.style.display = 'flex';
+                startCountdown();
+            }
+        }
+
+        // Countdown logic with circular countdown timer (5 seconds)
+        function startCountdown() {
+            let timeLeft = 5;
+            countdownElement.textContent = timeLeft;
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    capturePhoto();
+                }
+            }, 1000);
+        }
+
+        // Capture photo and send to API
+        function capturePhoto() {
+            stopDetection = true; // Stop drawing the video to canvas
+            video.srcObject.getTracks().forEach(track => track.stop()); // Stop video feed
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('image', blob);
+
+                fetch('https://192.168.30.147:8000/detect_faces', { method: 'POST', body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        const detected = data[0];
+                        if (detected.name !== "Unknown") {
+                            localStorage.setItem("userIdentifier", detected?.name);
+                            fetchUserData();
+                        } else {
+                            showAlert();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        message.innerHTML = 'An error occurred during authentication.';
+                    });
+            }, 'image/jpeg');
+        }
+
+        // Fetch user data after successful authentication
+        async function fetchUserData() {
+            const userIdentifier = localStorage.getItem('userIdentifier');
+            try {
+                await fetch(`${window.baseUrl}/bny/id/${userIdentifier}`)
+                    .then(userResponse => userResponse.json())
+                    .then(userData => {
+                        localStorage.setItem('userId', userData?._id);
+                        localStorage.setItem('userName', userData?.fullName);
+                        initiateJourney();
+                    });
+            } catch (error) {
+                console.error("Error fetching user's data: ", error);
+            }
+        }
+
+        // Initiate the user's journey
+        async function initiateJourney() {
+            const userId = localStorage.getItem('userId');
+            try {
+                await fetch(`${window.baseUrl}/user-analytics/journey-started/${userId}`)
+                    .then(journeyResponse => journeyResponse.json())
+                    .then(journeyData => {
+                        window.location.replace('./hello.html');
+                    });
+            } catch (error) {
+                console.error("Error initiating user journey", error);
+            }
+        }
+
+        // Show alert and redirect to registration if face is not recognized
+        function showAlert() {
+            alert('Your face was not detected. Click OK to retry.');
+            window.location.replace('./index.html');
+        }
+
+        // Start the video feed when the page loads
+        startVideo();
+    </script>
+</body>
+
+</html>

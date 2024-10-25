@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Mutual Fund Sahi hai</title>
+	<meta name="description" content="Mutual Fund Sahi hai" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Stylesheets -->
+	<link href="./css/bootstrap.min.css" rel="stylesheet" />
+	<link href="./css/main.css" rel="stylesheet" />
+	<link href="./css/responsive.css" rel="stylesheet" />
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet" />
+
+	<!-- Add site Favicon -->
+	<link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon" />
+	<link rel="icon" href="./images/favicon.png" type="image/x-icon" />
+	<meta name="msapplication-TileImage" content="images/favicon.png" />
+</head>
+
+<body class="overflow-h">
+	<div class="page-wrapper">
+		<!-- Main Header-->
+		<header class="main-header">
+			<!-- Header Upper -->
+			<div class="header-upper">
+				<div class="outer-container">
+					<div class="inner-container clearfix">
+						<div class="pull-left logo-box">
+							<div class="logo">
+								<a href="javascript:void(0);"><img src="./images/bhaarat-nivesh-yatra.svg" alt=""
+										title="" /></a>
+							</div>
+						</div>
+
+						<!-- Outer Box -->
+						<div class="outer-box clearfix pull-right logo-box">
+							<!-- Mobile Navigation Toggler -->
+							<div class="logo">
+								<a href="javascript:void(0);"><img src="./images/mutual-fund-sahi-hai.svg" alt=""
+										title="" /></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End Header Upper-->
+
+		</header>
+		<!--End Main Header -->
+
+		<section class="contact-page-section bg-image">
+			<div class="auto-container bg-color padd-70">
+				<div class="row clearfix">
+					<!-- Form Column -->
+					<div class="form-column col-lg-12 col-md-12 col-sm-12">
+						<div class="inside-box">
+							<section class="project-detail-section">
+								<div class="auto-container">
+									<!-- Upper Box -->
+									<div class="divider"></div>
+									<h1 class="video-title" id="video-title">Video 1 Title</h1>
+									<div class="divider mb-30"></div>
+									<div class="video-wrapper">
+										<video id="videoPlayer" width="100%" autoplay muted>
+											<source src="" type="video/mp4" id="videoSource" />
+											Your browser does not support the video tag.
+										</video>
+										<div class="mute-button-wrapper">
+											<button id="muteButton">Unmute</button>
+										</div>
+									</div>
+
+									<!-- Next button -->
+									<a href="#" id="nextButton" class="btn-style-three" style="display: none">Next</a>
+									<span id="countdown"></span>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!--End pagewrapper-->
+
+	<!-- Scroll To Top -->
+	<div class="scroll-to-top scroll-to-target" data-target="html">
+		<span class="fa fa-arrow-circle-up"></span>
+	</div>
+
+	<script src="./js/jquery.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+
+	<script type="module">
+		import { startTimer } from "./js/helper.js";
+
+		// Get video element and buttons
+		let videoPlayer = document.getElementById("videoPlayer");
+		let muteButton = document.getElementById("muteButton");
+		let nextButton = document.getElementById("nextButton");
+		let heading = document.getElementById("video-title");
+
+		// Fetch the selected language from localStorage
+		const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+
+		// Define video paths based on the selected language
+		const videoPath = `./video/${selectedLanguage}/`;
+
+		// Initialize video data array
+		let videos = [
+			{ src: `${videoPath}video-1.mp4`, key: 'video-1' },
+			{ src: `${videoPath}video-2.mp4`, key: 'video-2' },
+			{ src: `${videoPath}video-3.mp4`, key: 'video-3' },
+			{ src: `${videoPath}video-4.mp4`, key: 'video-4' }
+		];
+
+		let currentVideoIndex = 0; // Track current video
+		let nextButtonText = ''; // Declare variable for Next button text
+		let goToNextPageText = ''; // Declare variable for Go to Next Page text
+
+		// Function to replace placeholders in text with actual values
+		function replacePlaceholders(text, placeholders) {
+			for (const key in placeholders) {
+				const regex = new RegExp(`\\$${key}\\$`, 'g');
+				text = text.replace(regex, placeholders[key]);
+			}
+			return text;
+		}
+
+		// Function to load the language JSON file and set video titles and button text
+		function loadLanguageStrings() {
+			const langFilePath = `./lang/${selectedLanguage}.json`;
+
+			fetch(langFilePath)
+				.then(response => response.json())
+				.then(translations => {
+					// Define placeholders if needed
+					const placeholders = {
+						USER: localStorage.getItem('userName') || 'Guest'
+					};
+
+					// Update the video titles dynamically from the JSON translations
+					videos = videos.map((video, index) => ({
+						...video,
+						title: replacePlaceholders(translations[video.key] || video.key, placeholders)
+					}));
+
+					// Set the initial video and title
+					setVideo(currentVideoIndex);
+
+					// Update the Next button text
+					nextButtonText = translations['next-btn'] || 'Next';
+					nextButton.textContent = nextButtonText;
+
+					// Store 'Go to Next Page' text if available
+					goToNextPageText = translations['next-btn'] || 'Go to Next Page';
+				})
+				.catch(error => console.error('Error loading language file:', error));
+		}
+
+		// Function to set the video source and title
+		function setVideo(index) {
+			videoPlayer.src = videos[index].src;
+			heading.textContent = videos[index].title;
+			videoPlayer.load();
+			videoPlayer.muted = false;
+			videoPlayer.play();
+			updateMuteButton();
+		}
+
+		// Mute/Unmute functionality
+		function updateMuteButton() {
+			muteButton.innerHTML = videoPlayer.muted
+				? '<i class="fa fa-volume-mute"></i> Unmute'
+				: '<i class="fa fa-volume-up"></i> Mute';
+		}
+
+		muteButton.addEventListener("click", function () {
+			videoPlayer.muted = !videoPlayer.muted;
+			updateMuteButton();
+		});
+
+		// Show the Next button when 30 seconds have passed
+		videoPlayer.addEventListener("timeupdate", function () {
+			if (currentVideoIndex < videos.length - 1 && videoPlayer.currentTime >= 30) {
+				nextButton.style.display = "block";
+				nextButton.textContent = nextButtonText; // Ensure button text is updated
+			} else if (currentVideoIndex === videos.length - 1 && videoPlayer.currentTime >= 30) {
+				nextButton.href = "start-planning-now.html";
+				nextButton.textContent = goToNextPageText; // Use the translated text
+				nextButton.style.display = "block";
+			}
+		});
+
+		// Next button click functionality
+		nextButton.addEventListener("click", function (e) {
+			if (currentVideoIndex < videos.length - 1) {
+				e.preventDefault();
+				videoPlayer.pause();
+				currentVideoIndex++;
+				if (currentVideoIndex < videos.length) {
+					setVideo(currentVideoIndex);
+					nextButton.style.display = "none";
+				}
+			} else {
+				// For the last video, the next button redirects to the next page
+				nextButton.href = "start-planning-now.html";
+			}
+		});
+
+		// On page load, load language strings and initialize video player
+		window.onload = function () {
+			loadLanguageStrings();
+			updateMuteButton();
+
+			// Initialize and start the timer (assuming startTimer function is defined elsewhere)
+			let duration = 120;
+			let display = document.querySelector("#countdown");
+
+			// Start the initial timer
+			let intervalId = startTimer(duration, display);
+
+			window.onclick = function () {
+				// Clear the old timer before starting a new one
+				if (intervalId) {
+					clearInterval(intervalId);
+				}
+
+				// Reset the timer
+				intervalId = startTimer(duration, display);
+			};
+		};
+	</script>
+</body>
+
+</html>

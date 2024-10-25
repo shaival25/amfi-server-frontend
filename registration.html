@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mutual Fund Sahi hai</title>
+    <meta name="description" content="Mutual Fund Sahi hai" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Stylesheets -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
+    <!-- Add site Favicon -->
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <meta name="msapplication-TileImage" content="images/favicon.png" />
+  </head>
+
+  <body class="overflow-h">
+    <div class="page-wrapper">
+      <!-- Main Header-->
+      <header class="main-header">
+        <!-- Header Upper -->
+        <div class="header-upper">
+          <div class="outer-container">
+            <div class="inner-container clearfix">
+              <div class="pull-left logo-box">
+                <div class="logo">
+                  <a href="index.html"
+                    ><img src="images/bhaarat-nivesh-yatra.svg" alt="" title=""
+                  /></a>
+                </div>
+              </div>
+
+              <!-- Outer Box -->
+              <div class="outer-box clearfix pull-right logo-box">
+                <!-- Mobile Navigation Toggler -->
+                <div class="logo">
+                  <a href="index.html"
+                    ><img src="images/mutual-fund-sahi-hai.svg" alt="" title=""
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Header Upper-->
+      </header>
+      <!--End Main Header -->
+
+      <section class="contact-page-section bg-image pt-0">
+        <div class="bg-color2">
+          <div class="auto-container padd-70 pb-30">
+            <div class="text-box">
+              <p class="text-center mb-30 title-text-head">
+                <b
+                  >Ready to get started on your investment journey?
+                  <br />
+                  Share some details with us, and we'll help you along the
+                  way.</b
+                >
+              </p>
+              <p class="text-center mt-2 mb-30">
+                <span class="gradient-button"><b>Fill in your details</b></span>
+              </p>
+            </div>
+
+            <div class="row clearfix">
+              <!-- Form Column -->
+              <div class="form-column col-lg-12 col-md-12 col-sm-12">
+                <div class="inner-column">
+                  <!-- Contact Form -->
+                  <div class="contact-form">
+                    <!-- Contact Form -->
+                    <form method="post">
+                      <div class="row clearfix">
+                        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder="Name*"
+                            required
+                          />
+                        </div>
+
+                        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                          <select
+                            name="gender"
+                            id="gender-select"
+                            class="form-select"
+                            required
+                          >
+                            <option value="">Gender*</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                          </select>
+                        </div>
+
+                        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                          <label for="dob" id="dob-label">Date of Birth</label>
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="dob"
+                            name="dob"
+                            placeholder="Date of Birth"
+                            value="Date of Birth"
+                          />
+                        </div>
+
+                        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                          <label for="SelExample" id="select-label"
+                            >Select City</label
+                          >
+                          <select id="SelExample" class="form-select" required>
+                            <option value="">Select City*</option>
+                          </select>
+                        </div>
+
+                        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                          <input
+                            type="text"
+                            pattern="[1-9]{1}[0-9]{9}"
+                            onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+                            onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                            name="contactNumber"
+                            placeholder="Phone no*"
+                            required
+                          />
+                        </div>
+
+                        <div class="col-lg-12 col-md-6 col-sm-12 form-group">
+                          <input
+                            type="email"
+                            pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                            name="email"
+                            placeholder="Email Id*"
+                            required
+                          />
+                        </div>
+
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 form-group Center"
+                        >
+                          <div class="checkbox">
+                            <input
+                              id="checkbox1"
+                              class="styled"
+                              type="checkbox"
+                              required
+                            />
+                            <label
+                              for="checkbox1"
+                              style="color: black; font-weight: 600"
+                            >
+                              I agree to the Terms of Service & Privacy Policy
+                            </label>
+                          </div>
+                          <p
+                            class="agree"
+                            style="color: black; font-weight: 600"
+                          >
+                            By entering your personal details, you hereby
+                            authorize AMFI and Mutual Funds Sahi Hai and/or its
+                            authorized service provider(s) to contact you and
+                            this will override any NDNC registration made by
+                            you.
+                          </p>
+                        </div>
+
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 form-group Center msg-btn"
+                        >
+                          <button
+                            class="theme-btn btn-style-one"
+                            type="button"
+                            name="submit-form"
+                            onclick="submitFormWithCamera()"
+                          >
+                            <span class="txt">Submit</span>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- End Contact Form -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!--End pagewrapper-->
+
+    <!-- Scroll To Top -->
+    <div class="scroll-to-top scroll-to-target" data-target="html">
+      <span class="fa fa-arrow-circle-up"></span>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script>
+      // Validation logic to ensure all required fields (except dob) are filled
+      function submitFormWithCamera() {
+        const fullName = document.querySelector('input[name="name"]').value
+        const gender = document.querySelector('select[name="gender"]').value
+        const city = document.querySelector('#SelExample').value
+        const contactNumber = document.querySelector(
+          'input[name="contactNumber"]'
+        ).value
+        const email = document.querySelector('input[name="email"]').value
+        const agreeCheckbox = document.querySelector('#checkbox1').checked
+
+        // Check if all required fields (except dob) are filled
+        if (
+          !fullName ||
+          !gender ||
+          !city ||
+          !contactNumber ||
+          !email ||
+          !agreeCheckbox
+        ) {
+          alert(
+            'Please fill out all required fields and agree to the Terms of Service.'
+          )
+          return false
+        }
+
+        // Form data to be stored
+        const formData = {
+          fullName: document.querySelector('input[name="name"]').value,
+          gender: document.querySelector('select[name="gender"]').value,
+          dob: document.querySelector('input[name="dob"]').value,
+          city: $('#SelExample').find(':selected').text().split(',')[0].trim(),
+          state: $('#SelExample').find(':selected').text().split(',')[1].trim(),
+          email: document.querySelector('input[name="email"]').value,
+          contactNumber: document.querySelector('input[name="contactNumber"]')
+            .value
+        }
+        console.log(formData)
+
+        // Store form data and redirect to the camera page
+        localStorage.setItem('formData', JSON.stringify(formData)) // Store form data
+        window.location.href = 'camera.html' // Redirect to camera page
+      }
+
+      $(document).ready(function () {
+        // Initialize select2
+        $('#SelExample').select2()
+        $.ajax({
+          url: `${window.baseUrl}/bny/cities`,
+          method: 'GET',
+          success: function (data) {
+            data.forEach(function (city, index) {
+              $('#SelExample').append(
+                `<option value="${index}">${city.city}, ${city.state}</option>`
+              )
+            })
+          },
+          error: function (error) {
+            console.error('Error fetching cities:', error)
+          }
+        })
+      })
+    </script>
+    <script src="js/jquery.fancybox.js"></script>
+    <script src="js/appear.js"></script>
+    <script src="js/owl.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script src="js/tilt.jquery.min.js"></script>
+    <script src="js/jquery.paroller.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/script.js"></script>
+    <script src="./js/config.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mutual Fund Sahi hai</title>
+    <meta name="description" content="Mutual Fund Sahi hai" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Stylesheets -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+
+    <style>
+        .main-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            z-index: 1000;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .inner-box {
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            background: #33333373;
+        }
+
+        .main-bg {
+            background: url(./images/backgrouns.jpg);
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            padding-top: 0vh;
+        }
+    </style>
+
+    <!-- Add site Favicon -->
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <meta name="msapplication-TileImage" content="images/favicon.png" />
+</head>
+
+<body class="overflow-h main-bg">
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Header Upper -->
+        <div class="header-upper">
+            <div class="outer-container">
+                <div class="inner-container clearfix">
+                    <div class="pull-left logo-box">
+                        <div class="logo">
+                            <a href="index.html"><img src="images/bhaarat-nivesh-yatra.svg" alt="" title="" /></a>
+                        </div>
+                    </div>
+
+                    <!-- Outer Box -->
+                    <div class="outer-box clearfix pull-right logo-box">
+                        <div class="logo">
+                            <a href="index.html"><img src="images/mutual-fund-sahi-hai.svg" alt="" title="" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Upper -->
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><span class="icon lnr lnr-cross"></span></div>
+
+            <nav class="menu-box">
+                <div class="nav-logo">
+                    <a href="index.html"><img src="images/logo-2.png" alt="" title="" /></a>
+                </div>
+                <div class="menu-outer">
+                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                </div>
+            </nav>
+        </div>
+        <!-- End Mobile Menu -->
+    </header>
+    <!-- End Main Header -->
+
+    <section class="contact-page-section bg-image">
+        <div class="main-box">
+            <div class="inner-box padd-70">
+                <label for="language" class="fs-4 m-4">
+                    Please choose your preferred language.
+                </label>
+                <div class="select-language-drop d-flex justify-content-center">
+                    <select class="form-select custom-width" style="width: 300px;" id="language" name="language"
+                        required>
+                        <option selected value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="gj">Gujarati</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ka">Kannada</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mt">Marathi</option>
+                        <option value="tl">Tamil</option>
+                        <option value="tu">Telugu</option>
+                    </select>
+                </div>
+                <p class="text-center pt-2">
+                    <button class="theme-btn btn-style-one" type="button" id="start-button"><span class="txt">Start
+                            Experience</span></button>
+                </p>
+                <!-- <p class="text-center"></p>
+                <a href="./face-reco-index.html">
+                    <button class="theme-btn btn-style-one" type="button"><span class="txt">Start Experience
+                        </span></button>
+                </a>
+                </p> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- End pagewrapper -->
+
+    <!-- Scroll To Top -->
+    <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-up"></span></div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/jquery.fancybox.js"></script>
+    <script src="./js/appear.js"></script>
+    <script src="./js/owl.js"></script>
+    <script src="./js/wow.js"></script>
+    <script src="./js/parallax.min.js"></script>
+    <script src="./js/tilt.jquery.min.js"></script>
+    <script src="./js/jquery.paroller.min.js"></script>
+    <script src="./js/jquery-ui.js"></script>
+    <script src="./js/script.js"></script>
+
+    <script>
+
+        document.getElementById('start-button').onclick = function () {
+            const languageSelect = document.getElementById('language');
+            const selectedLanguage = languageSelect.value;
+            
+            // Store the selected language in localStorage
+            localStorage.setItem('selectedLanguage', selectedLanguage);
+            window.location.href = './face-reco-index.html';
+
+        };
+
+    </script>
+
+    <script>
+        localStorage.clear();
+    </script>
+</body>
+
+</html>
